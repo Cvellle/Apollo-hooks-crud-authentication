@@ -8,7 +8,7 @@ import gql from "graphql-tag";
 import Header from './Header'
 
 const client = new ApolloClient({
-    uri: `https://login-apollo.herokuapp.com/graphql`
+    uri: `https://users-server-crud2.herokuapp.com/graphql`
 });
 
 const GET_DOGS = gql`
@@ -16,7 +16,6 @@ const GET_DOGS = gql`
     users {
       id
       email
-      name
     }
   }
 `;
@@ -29,18 +28,12 @@ const GET_DOGS = gql`
 
 const ADD_USER = gql`
   mutation addUser(
-    $name: String!
     $email: String!
     $password: String!
-    $phone: String
-    $status: Int
   ) {
     addUser(
-      name: $name
       email: $email
       password: $password
-      phone: $phone
-      status: $status
     ) {
       id
     }
@@ -48,11 +41,10 @@ const ADD_USER = gql`
 `;
 
 const UPDATE_TODO = gql`
-  mutation updateUser($id: ID!, $name: String!) {
-    updateUser(id: $id, name: $name) {
+  mutation updateUser($id: ID!, $email: String!) {
+    updateUser(id: $id, email: $email) {
       id
       email
-      name
     }
   }
 `;
@@ -74,18 +66,17 @@ function DogsList() {
     if (error) return <p>Error :(</p>;
     if (networkStatus === 4) return "Refetching!";
 
-    return data.users.map(({ id, name, email }) => {
+    return data.users.map(({ id, email }) => {
         let input;
 
         return (
             <div key={id}>
                 <p>{email}</p>
-                <p>{name}</p>
                 <form
                     onSubmit={e => {
                         e.preventDefault();
                         updateUser({
-                            variables: { id, name: input.value },
+                            variables: { id, email: input.value },
                             refetchQueries: [{ query: GET_DOGS, variables: { id } }]
                         });
                         refetch();
@@ -123,7 +114,7 @@ function AddUser() {
     // if (error) return <p>Error :(</p>;
     // if (networkStatus === 4) return 'Refetching!';
 
-    // return data.users.map(({ id, name }) => {
+    // return data.users.map(({ id, email }) => {
     let input1;
     let input2;
     let input3;
@@ -137,11 +128,8 @@ function AddUser() {
                     e.preventDefault();
                     addUser({
                         variables: {
-                            name: input1.value,
-                            email: input2.value,
-                            password: input3.value,
-                            phone: input4.value,
-                            status: input5.value
+                            email: input1.value,
+                            password: input2.value,
                         },
                         refetchQueries: [{ query: GET_DOGS }]
                     });
@@ -156,21 +144,6 @@ function AddUser() {
                 <input
                     ref={node => {
                         input2 = node;
-                    }}
-                />
-                <input
-                    ref={node => {
-                        input3 = node;
-                    }}
-                />
-                <input
-                    ref={node => {
-                        input4 = node;
-                    }}
-                />
-                <input
-                    ref={node => {
-                        input5 = node;
                     }}
                 />
                 <button type="submit">Add user</button>

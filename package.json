@@ -4,7 +4,8 @@
   "description": "authentication-and-authorization-in-graphql",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js --ignore client"
+    "dev": "nodemon index.js --ignore client",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
