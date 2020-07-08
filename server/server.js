@@ -11,6 +11,10 @@ const schema = require('./schema/schema');
 // Create a new Express application
 const app = express();
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client"));
+}
+
 // Replace with your mongoLab URI
 const MONGO_URI = 'mongodb://Cvele:cveledb1@ds129914.mlab.com:29914/posts';
 
