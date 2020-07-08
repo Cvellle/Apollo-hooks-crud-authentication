@@ -12,7 +12,7 @@ const schema = require('./schema/schema');
 const app = express();
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+  app.use(express.static("client"));
 }
 
 // Replace with your mongoLab URI
