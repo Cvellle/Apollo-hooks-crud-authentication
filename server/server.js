@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client"));
 }
 
-const MONGO_URI = 'mongodb+srv://cvele:cvelePass@posts.jzao1.mongodb.net/';
+const MONGO_URI = 'mongodb+srv://cvele:cvelePass@posts.jzao1.mongodb.net/posts2';
 
 // Mongoose's built in promise library is deprecated, replace it with ES2015 Promise
 mongoose.Promise = global.Promise;
