@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // const MONGO_URI = "mongodb://Cvele:cveledb1@ds129914.mlab.com:29914/posts";
-const MONGO_URI = "mongodb://Cvele:cveledb2@ds011422.mlab.com:11422/posts2";
+const MONGO_URI = "mongodb+srv://cvele:cvelePass@posts.jzao1.mongodb.net/posts";
 if (!MONGO_URI) {
   throw new Error("You must provide a MongoLab URI");
 }
