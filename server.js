@@ -20,8 +20,8 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// const MONGO_URI = "mongodb://Cvele:cveledb1@ds129914.mlab.com:29914/posts";
-const MONGO_URI = "mongodb+srv://cvele:cvelePass@posts.jzao1.mongodb.net/posts";
+const MONGO_URI = "mongodb://Cvele:cveledb1@ds129914.mlab.com:29914/posts";
+// const MONGO_URI = "mongodb+srv://cvele:cvelePass@posts.jzao1.mongodb.net/posts";
 if (!MONGO_URI) {
   throw new Error("You must provide a MongoLab URI");
 }
