@@ -28,7 +28,12 @@ if (!MONGO_URI) {
 }
 
 mongoose.Promise = global.Promise;
-mongoose.connect(MONGO_URI, { useNewUrlParser: true });
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+});
 mongoose.connection
   .once("open", () => console.log("Connected to MongoLab instance."))
   .on("error", (error) => console.log("Error connecting to MongoLab:", error));
