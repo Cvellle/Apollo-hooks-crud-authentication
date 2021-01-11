@@ -6,6 +6,8 @@ import gql from "graphql-tag";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { createHttpLink } from "apollo-link-http";
 import { useQuery, useMutation } from "react-apollo-hooks";
+import { graphql } from "react-apollo";
+import currentUserQuery from "../queries/CurrentUser";
 
 const cache = new InMemoryCache({
   dataIdFromObject: (object) => object.id || null,
@@ -63,7 +65,7 @@ function PersonsList() {
   if (error) return <p>Error :(</p>;
   if (networkStatus === 4) return "Refetching!";
 
-  if (data && data.users) {
+  if (data && data.users && !loading) {
     return data.users.map(({ id, email }) => {
       let input;
 
@@ -161,7 +163,7 @@ class Dashboard extends Component {
           <h4>Add persons</h4>
           <div>
             <AddUser />
-            <PersonsList />
+            {this.props.data.user && <PersonsList />}
           </div>
         </ApolloHooksProvider>
       </ApolloProvider>
@@ -169,4 +171,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default graphql(currentUserQuery)(Dashboard);

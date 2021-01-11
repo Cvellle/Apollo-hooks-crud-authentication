@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { HashRouter, Route } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route } from "react-router-dom";
 import { ApolloClient } from "apollo-client";
 import { ApolloProvider as ApolloHooksProvider } from "react-apollo-hooks";
 import { ApolloProvider } from "react-apollo";
@@ -27,12 +27,12 @@ class Root extends Component {
       <div className="container">
         <ApolloProvider client={client}>
           <ApolloHooksProvider client={client}>
-            <HashRouter>
+            <BrowserRouter>
               <Header />
               <Route path="/" component={requireAuth(Dashboard)} exact />
               <Route path="/login" component={LoginForm} exact />
               <Route path="/signup" component={SignupForm} exact />
-            </HashRouter>
+            </BrowserRouter>
           </ApolloHooksProvider>
         </ApolloProvider>
       </div>
