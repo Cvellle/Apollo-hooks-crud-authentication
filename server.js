@@ -27,14 +27,17 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// const process.env.MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI;
 
-if (!process.env.MONGODB_URI) {
+// const MONGODB_URI =
+//   "mongodb://cvele:cvelePass@posts-shard-00-00.jzao1.mongodb.net:27017,posts-shard-00-01.jzao1.mongodb.net:27017,posts-shard-00-02.jzao1.mongodb.net:27017/posts?ssl=true&replicaSet=posts-shard-0&authSource=admin&retryWrites=true&w=majority";
+
+if (!MONGODB_URI) {
   throw new Error("You must provide a MongoLab URI");
 }
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -50,7 +53,7 @@ app.use(
     saveUninitialized: true,
     secret: "aaabbbccc",
     store: new MongoStore({
-      url: process.env.MONGODB_URI,
+      url: MONGODB_URI,
       autoReconnect: true,
     }),
   })
