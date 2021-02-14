@@ -1,4 +1,4 @@
-# Good-choice
+# Apollo hooks authentication app
 
 Apollo client authentication, and crud for other server.
 Apollo hooks used for crud.
